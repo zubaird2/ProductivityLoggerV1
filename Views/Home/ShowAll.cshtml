@@ -1,0 +1,123 @@
+﻿@model PUCIT.AIMRL.PMS.Entities.CmplexProcess_imgDTO
+@{
+    ViewBag.Title = "ShowAll";
+    Layout = "~/Views/Shared/_ValidLayout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+
+        $("#tbl1").closest("table").DataTable();
+
+    });
+</script>
+
+    <h2>ShowAll</h2>
+<a href="/Profile/Chart">View Data in Gragh</a><br />
+
+<!--this script is imp for slide of images-->
+<script type="text/javascript">
+    hs.graphicsDir = '@Url.Content("~/Scripts/graphics/")';
+    hs.align = 'center';
+    hs.transitions = ['expand', 'crossfade'];
+    hs.fadeInOut = true;
+    hs.dimmingOpacity = 0.8;
+    hs.outlineType = 'rounded-white';
+    hs.captionEval = 'this.thumb.alt';
+    hs.marginBottom = 105; // make room for the thumbstrip and the controls
+    hs.numberPosition = 'caption';
+
+    // Add the slideshow providing the controlbar and the thumbstrip
+    hs.addSlideshow({
+        //slideshowGroup: 'group1',
+        interval: 5000,
+        repeat: false,
+        useControls: true,
+        overlayOptions: {
+            className: 'text-controls',
+            position: 'bottom center',
+            relativeTo: 'viewport',
+            offsetY: -60
+        },
+        thumbstrip: {
+            position: 'bottom center',
+            mode: 'horizontal',
+            relativeTo: 'viewport'
+        }
+    });
+</script>
+
+<a href="/Home/listtocsv">Export CSV</a><br>
+<a href="/Home/listtoxls">Export XLS</a><br>
+
+<a href="@Url.Action("ExportPDF","Home")">ExportPDF</a>
+
+
+<h2>ShowAll</h2>
+<div class="highslide-gallery">
+    @for (int i = 0; i < Model.ImgData.Count; i++)
+    {
+        if (File.Exists(Server.MapPath("/Images/"+Model.ImgData[i].Img)))
+        {
+            
+            <a  href='@Url.Content("~/Images/"+Model.ImgData[i].Img)' class="highslide" onclick="return hs.expand(this)">
+            <img class="img-circle" src='@Url.Content("~/Images/"+Model.ImgData[i].Img)' height="200" width="200" 
+                 alt='Date-Time:@Model.ImgData[i].Time,UserID:@Model.ImgData[i].UserID '
+                     title="Click to enlarge" />
+           
+        </a>
+        }
+        else {
+        <a  href='@Url.Content("~/Images/"+Model.ImgData[i].Img)' class="highslide" onclick="return hs.expand(this)">
+            <img class="img-circle" src='@Url.Content("~/img/error404.jpg")' height="200" width="200" 
+                 alt='Date-Time:@Model.ImgData[i].Time,UserID:@Model.ImgData[i].UserID '
+                     title="Click to enlarge" />
+           
+        </a>
+        }
+        
+     
+    }
+</div>  
+    <table class="table-striped" border="1" >
+        <thead>
+            <tr>
+                <td>[Id]</td>
+                <td>[ProcessId]</td>
+                <td>[ProcessName]</td>
+                <td>[ProcessTitle]</td>
+                <td>[userid]</td>
+                <td>[StartActiveTime]</td>
+                <td>[EndActiveTime]</td>
+                <td>[keyStroke]</td>
+                <td>[P_Hieght]</td>
+                <td>[P_Width]</td>
+                <td>[MouseUseCount]</td>
+                <td>[MouseTime]</td>
+                <td>[MachineName]</td>
+            </tr>
+        </thead>
+
+        <tbody id="tbl1">
+            @for (int i = 0; i < Model.ProcessData.Count; i++)
+            {
+                <tr>
+                    <td>@Model.ProcessData[i].Id</td>
+                    <td>@Model.ProcessData[i].ProcessId</td>
+                    <td>@Model.ProcessData[i].ProcessName</td>
+                    <td>@Model.ProcessData[i].ProcessTitle</td>
+                    <td>@Model.ProcessData[i].UserId</td>
+                    <td>@Model.ProcessData[i].StartActiveTime</td>
+                    <td>@Model.ProcessData[i].EndActiveTime</td>
+                    <td>@Model.ProcessData[i].keyStroke</td>
+                    <td>@Model.ProcessData[i].P_Hieght</td>
+                    <td>@Model.ProcessData[i].P_Width</td>
+                    <td>@Model.ProcessData[i].MouseUseCount</td>
+                    <td>@Model.ProcessData[i].MouseTime</td>
+                    <td>@Model.ProcessData[i].MachineName</td>
+                </tr>
+            }
+            </tbody>
+</table>      
+  <a href="/Home/GetChart">Graph</a>
+
+  

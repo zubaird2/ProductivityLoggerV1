@@ -1,0 +1,77 @@
+﻿@model PUCIT.AIMRL.PMS.Entities.ProfileObject
+
+@{
+    ViewBag.Title = "userProfile";
+    Layout = "~/Views/Shared/_ValidLayout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        function readURL(input) {
+            alert("in read url");
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgInp").change(function () {
+            alert("in change");
+            readURL(this);
+        });
+
+
+    });
+
+</script>
+<h2>userProfile</h2>
+<form method="post" action="/Profile/updateInfo" enctype="multipart/form-data" class="form-horizontal">
+    <input type="hidden" value="@Model.ProfileId" />
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UName, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" value="@Model.UName" name="UName" readonly />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ImgUrl, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            <img src="../img/@Model.ImgUrl" width="250" height="300" id="blah" />
+            <input type="file" name="userpic[0]" id="imgInp">
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Age, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" value="@Model.Age" name="Age" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Profession, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" value="@Model.Profession" name="Profession" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+
+
+
+
+
+</form>

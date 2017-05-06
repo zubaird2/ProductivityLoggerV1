@@ -1,0 +1,113 @@
+﻿@model List<PUCIT.AIMRL.PMS.Entities.GroupObject>
+
+@{
+    ViewBag.Title = "Simple";
+    Layout = "~/Views/Shared/_ValidLayout.cshtml";
+}
+<style>
+    .collapse {
+        width: 15px;
+        background-image: url(../img/ui-icons_454545_256x240.png);
+        background-repeat: no-repeat;
+        background-position: -36px,-17px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .expand {
+        width: 15px;
+        background-image: url(../img/ui-icons_454545_256x240.png);
+        background-repeat: no-repeat;
+        background-position: -50px,-17px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .treeview ul {
+        font: 14px Arial,Sans-Serif;
+        margin: 0px;
+        padding-left: 20px;
+        list-style: none;
+    }
+
+    .treeview > li > a {
+        font-weight: bold;
+    }
+
+    .treeview li {
+    }
+
+        .treeview li a {
+            padding: 4px;
+            font-size: 12px;
+            display: inline-block;
+            text-decoration: none;
+            width: auto;
+        }
+</style>
+
+
+
+
+@********************** *Tree*************************@
+@helper GetTreeView(List<PUCIT.AIMRL.PMS.Entities.GroupObject> siteMenu, int? ParentGID)
+{
+    foreach (var i in siteMenu.Where(a => a.ParentGID.Equals(ParentGID)))
+    {
+        <li>
+            
+            @{var submenu = siteMenu.Where(a => a.ParentGID.Equals(i.GID)).Count();}
+          
+            
+              @if (submenu > 0)
+            {
+                <span class="collapse collapsible">&nbsp;</span>
+            }
+            else
+            {
+                <span style="width:15px; display:inline-block">&nbsp;</span>
+            }
+            <span>
+                <a href="/Show/GetSubGroupUser/@i.GID">@i.GName</a>
+            </span>
+
+
+            @if (submenu > 0)
+            {
+                <ul>
+                    @GetTreeView(siteMenu, i.GID)
+
+                </ul>
+            }
+        </li>
+    }
+}
+
+
+<h2>Showing All Groups</h2>
+<div style="float:right;width:20%;">
+    <div style="border: solid 1px black; padding: 10px; background-color: #FAFAFA">
+        <div class="treeview">
+            @if (Model != null && Model.Count() > 0)
+            {
+                <ul>
+                    @GetTreeView(Model, Model.FirstOrDefault().ParentGID)
+                </ul>
+            }
+        </div>
+    </div>
+    </div>
+
+
+    <script>
+    $(document).ready(function () {
+        $(".treeview li>ul").css('display', 'none');
+        $(".collapsible").click(function (e) {
+            e.preventDefault();
+            $(this).toggleClass("collapse expand");
+            $(this).closest('li').children('ul').slideToggle();
+        });
+
+    });
+    </script>
+@********************** *Tree*************************@

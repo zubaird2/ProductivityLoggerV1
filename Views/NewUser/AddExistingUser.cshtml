@@ -1,0 +1,60 @@
+﻿@model PUCIT.AIMRL.PMS.Entities.ComplexUserGroupDTO
+@{
+    ViewBag.Title = "AddExistingUser";
+    Layout = "~/Views/Shared/_ValidLayout.cshtml";
+}
+
+<script>
+
+   
+    function check() {
+        var selectgroupid = document.getElementById('ParentGID');
+        var option = selectgroupid.options[selectgroupid.selectedIndex];
+        var groupattributevalue = option.getAttribute('value');
+        //this to inforce a supervisor or other than client to select group must
+        if (groupattributevalue == 0) {
+            alert("Select Group");
+            return false;
+        }
+
+
+        var selectgroupid = document.getElementById('UserID');
+        var option = selectgroupid.options[selectgroupid.selectedIndex];
+        var groupattributevalue = option.getAttribute('value');
+        //this to inforce a supervisor or other than client to select group must
+        if (groupattributevalue == 0) {
+            alert("Select Group");
+            return false;
+        }
+       
+    }
+
+</script>
+
+<form action="/NewUser/AddExistingUser" method="post">
+    <h2>AddExistingUser</h2>
+    <span style="color:red;display:block">@ViewBag.usercreatedmsg</span>
+
+    Select Group:
+    <select name="ParentGID" id="ParentGID" onchange="ch()" class="dropdown-header">
+        <option value="0">Select Group</option>
+        @foreach (var obj in Model.GroupList)
+        {
+            <option level="@obj.Level" value=@obj.GID>@obj.GName</option>
+        }
+
+    </select>
+
+
+    Parent User:
+    <select name="UserID" id="UserID" onchange="ch()" class="dropdown-header">
+        <option value="0">Select User</option>
+        @foreach (var obj in Model.UserList)
+        {
+            <option value=@obj.UserID>@obj.UName</option>
+        }
+
+    </select>
+    <br>
+    <input type="submit" onclick="check()" class="btn btn-lg btn-success btn-block" value="Add User">
+</form>

@@ -1,0 +1,173 @@
+﻿@model PUCIT.AIMRL.PMS.Entities.ComplexUserGroupDTO
+
+@{
+    ViewBag.Title = "GetSubGroupUser";
+    Layout = "~/Views/Shared/_ValidLayout.cshtml";
+}
+
+
+
+
+<!--now iterate both item and display them --->
+<h2 style="display:block"><a href="#">Group</a></h2>
+<div class="container-fluid">
+    @if (Model.GroupList.Count ==0)
+    {<h3>No Group In this Group create one<a href="/Group/Group">Create Group</a></h3> }
+    else
+    { 
+    <table class="table">
+        <tr>
+            <th>
+
+                GName
+            </th>
+            <th>
+               GDescription
+            </th>
+            <th>
+               ParentGID
+            </th>
+            <th>
+               CreatedOn
+            </th>
+            <th>
+                CreatedBy
+            </th>
+            <th>
+               ModifiedOn
+            </th>
+            <th>
+               ModifiedBy
+            </th>
+            <th>
+                Level
+            </th>
+            <th>
+                IsActive
+            </th>
+        </tr>
+         @foreach (var item in Model.GroupList)
+        {
+            <tr>
+                <td>
+                   @* this hit will go by url to make it post hit use ajax *@
+                    <a href="/Show/GetSubGroupUser/@item.GID">@item.GName</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParentGID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Level)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.GID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.GID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.GID })
+                </td>
+            </tr>
+        }
+
+    </table>
+    }
+</div>
+
+
+<h2  style="display:block"><a href="#">Users in this Group</a></h2>
+<div class="container-fluid">
+@if (Model.UserList.Count == 0)
+{ <h3>No User In this Group create one<a href="/NewUser/NewUser">Create User</a></h3> }
+else { 
+    <table class="table">
+
+        <tr>
+            <th>
+
+               
+               UserID 
+
+            </th>
+            <th>
+                Password
+            </th>
+            <th>
+                MachineName
+            </th>
+            <th>
+              CreatedBy
+            </th>
+            <th>
+                CreatedOn
+            </th>
+            <th>
+               ModifiedBy
+            </th>
+            <th>
+               ModifiedOn
+            </th>
+            <th>
+                IsActive
+            </th>
+          
+        </tr>
+
+        @foreach (var item in Model.UserList)
+        {
+            <tr>
+                <td>
+                    
+                    @{
+                        //Html.DisplayFor(modelItem => item.UName)
+                        }
+                    @Html.ActionLink(item.UName, "UserInfo", new { id = item.UserID })
+                    
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MachineName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+</div>

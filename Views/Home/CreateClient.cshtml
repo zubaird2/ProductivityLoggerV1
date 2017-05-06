@@ -1,0 +1,14 @@
+﻿@model PUCIT.AIMRL.PMS.Entities.UserObjects
+@{
+    ViewBag.Title = "CreateClient";
+    Layout = "~/Views/Shared/_ValidLayout.cshtml";
+}
+
+<h2>CreateClient</h2>
+<form action="/Home/CreateClient" method="post">
+    Client Name:
+    <input type="text" value="" /><br>
+    Password:
+    <input type="text" value="" /><br>
+    <input type="submit" value=""/>
+</form>

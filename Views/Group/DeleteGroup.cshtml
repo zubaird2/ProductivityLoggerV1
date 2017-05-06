@@ -1,0 +1,76 @@
+﻿@model List<PUCIT.AIMRL.PMS.Entities.GroupObject>
+@{
+    ViewBag.Title = "DeleteGrorup";
+    Layout = "~/Views/Shared/_ValidLayout.cshtml";
+}
+@section DeleteGroupFillData{
+     <script>
+         $(document).ready(function () {
+
+             $("#gid").bind("change", function () {
+                 
+                 var g = $(this).val();
+                 alert(g);
+                 $.ajax({
+                     type: 'Post',
+                     datatype: 'json',
+                     data: { gid: g },
+                     contenttype: 'application/json',
+                     url: '@Url.Action("groupDetail", "ShowAllGroup")',
+                     success: function (result) {
+                         var s = '';
+                         //var d = new Date(result[0].CreatedOn, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+                         //alert(d);
+                         var dateTime = getDateFromFormat(result[0].CreatedOn, "MM.dd.yyyy HH:mm:ss");
+                         alert(result[0].CreatedOn);
+                         for (var i = 0 ; i < result.length ; i++) {
+                            
+                             s +=
+
+
+                                '<div style="border: solid black 2px;"><br><span>Group Name:</span> <input type="text" readonly value= ' + result[i].GName + '></br></br>'
+                               + '<span>Group Description:</span><input type="text" readonly value= ' + result[i].GDescription + '></br> '
+                               + '</span></br><span>Created On: </span><input type="text" readonly value= ' + result[i].CreatedOn + '></br>'
+                               + '</span></br><span>Created by: </span><input type="text" readonly value= ' + result[i].CreatedBy + '></br><time datetime=' + result[i].CreatedOn + '></time></div>';
+
+                         }
+                         $("#div1").empty();
+                         $('#div1').append(s);
+                     }
+                 });
+
+
+             });
+
+         });
+        
+      
+        
+     </Script>
+    }
+
+<h2><a href="#">DeleteGrorup</a></h2><br>
+<span style="color:red;display:block;">@ViewBag.Gdeleted</span>
+<form action="/Group/DeleteGroup" method="post">
+    <h4>Select Group:</h4>
+    <select class="dropdown-header" name="GID"  id="gid">
+        <option value="-1">Select Group</option>
+        @foreach (var obj in Model)
+        {
+            <option value=@obj.GID>@obj.GName</option>
+        }
+
+    </select>
+    <br>
+    @{
+    //Group Name:
+    //<input type="text" name="GName" id="GName" value="" />
+    //<br>
+    //Group Description:
+    //<textarea name="GDescription" style="height:100px;width:100px"></textarea>
+    //<br>
+    }
+
+    <input type="submit" class="btn-danger"  value="Delete Group"><div id="div1"></div>
+</form>
+

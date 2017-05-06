@@ -1,0 +1,63 @@
+﻿
+@if (WebMainApp.Security.SessionManager.role.RoleName == "Admin")
+{<label >Select Role</label>
+    <select class="dropdown-header" name="RoleID" id="RoleName">
+        <option value=0>
+            Select Role
+        </option>
+
+        <option value=1>
+            Admin
+        </option>
+        <option value=2>
+            Client
+        </option>
+        <option value=4>
+            SuperVisor
+        </option>
+        <option value=3>
+            NormalUser
+        </option>
+    </select>
+}
+else if (WebMainApp.Security.SessionManager.role.RoleName == "Client")
+{
+    <label >Select Role</label>
+    <select class="dropdown-header" name="RoleID" id="RoleName">
+
+        <option value=0>
+            Select Role
+        </option>
+
+        <option value=4>
+            SuperVisor
+        </option>
+        <option value=3>
+            NormalUser
+        </option>
+    </select>
+    <label class="label-info">To Create Client Contact web site</label>
+}
+else if (WebMainApp.Security.SessionManager.role.RoleName == "SuperVisor")
+{
+    <label >Select Role</label>
+    <select class="dropdown-header" name="RoleID" id="RoleName">
+        <option value=0>
+            Select Role
+        </option>
+
+        <option value=4>
+            SuperVisor
+        </option>
+        <option value=3>
+            NormalUser
+        </option>
+    </select>
+}
+else
+{
+    <br>
+    <label >Role:NormalUser</label><br>
+    <input type="hidden" name="RoleID" value="3" />
+}
+

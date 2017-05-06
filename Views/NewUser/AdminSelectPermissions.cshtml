@@ -1,0 +1,159 @@
+﻿<div style="width:25%;float:left;background-color:lightgreen;right:5%">
+   
+        
+    <h3>Select Permissions</h3>
+  @if (WebMainApp.Security.SessionManager.role.RoleName == "Admin")
+  { 
+      
+    @Html.CheckBox("Create_User")
+    @Html.Label("Create User") <br>
+
+    @Html.CheckBox("Edit_User")
+    @Html.Label("Edit User")<br>
+
+    @Html.CheckBox("Delete_User")
+    @Html.Label("Delete User")<br>
+
+    @Html.CheckBox("Create_Group")
+    @Html.Label("Create Group")
+    <br>
+
+    @Html.CheckBox("View_Member_Data_In_Group")
+    @Html.Label("View Member Data In Group")
+    <br>
+
+    @Html.CheckBox("Delete_User_in_Group")
+    @Html.Label("Delete User in Group")
+    <br>
+
+    @Html.CheckBox("Create_User_in_Group")
+    @Html.Label("Create User in Group")
+    <br>
+
+    @Html.CheckBox("View_Member_Profile")
+    @Html.Label("View Member Profile")
+    <br>
+
+    @Html.CheckBox("Create_Group_Inside_Group")
+    @Html.Label("Create Group Inside Group")
+    <br>
+
+    @Html.CheckBox("Set_Permissions_Of_User")
+    @Html.Label("Set Permissions Of User")
+    <br>
+
+    @Html.CheckBox("Update_Password_User")
+    @Html.Label("Update Password User")
+    <br>
+
+    @Html.CheckBox("Update_Profile_User")
+    @Html.Label("Update Profile User")
+    <br>
+
+    @Html.CheckBox("CRUDS_Client")
+    @Html.Label("CRUDS Client")
+  }
+  else if (WebMainApp.Security.SessionManager.role.RoleName == "Client")
+  {
+        @Html.CheckBox("Create_User")
+    @Html.Label("Create User") <br>
+
+    @Html.CheckBox("Edit_User")
+    @Html.Label("Edit User")<br>
+
+    @Html.CheckBox("Delete_User")
+    @Html.Label("Delete User")<br>
+
+    @Html.CheckBox("Create_Group")
+    @Html.Label("Create Group")
+    <br>
+
+    @Html.CheckBox("View_Member_Data_In_Group")
+    @Html.Label("View Member Data In Group")
+    <br>
+
+    @Html.CheckBox("Delete_User_in_Group")
+    @Html.Label("Delete User in Group")
+    <br>
+
+    @Html.CheckBox("Create_User_in_Group")
+    @Html.Label("Create User in Group")
+    <br>
+
+    @Html.CheckBox("View_Member_Profile")
+    @Html.Label("View Member Profile")
+    <br>
+
+    @Html.CheckBox("Create_Group_Inside_Group")
+    @Html.Label("Create Group Inside Group")
+    <br>
+
+    @Html.CheckBox("Set_Permissions_Of_User")
+    @Html.Label("Set Permissions Of User")
+    <br>
+
+    @Html.CheckBox("Update_Password_User")
+    @Html.Label("Update Password User")
+    <br>
+
+    @Html.CheckBox("Update_Profile_User")
+    @Html.Label("Update Profile User")
+    <br>
+  }
+  else if (WebMainApp.Security.SessionManager.role.RoleName == "SuperVisor")
+  {
+    
+    @Html.CheckBox("View_Member_Data_In_Group")
+    @Html.Label("View Member Data In Group")
+    <br>
+
+    @Html.CheckBox("Delete_User_in_Group")
+    @Html.Label("Delete User in Group")
+    <br>
+
+    @Html.CheckBox("Create_User_in_Group")
+    @Html.Label("Create User in Group")
+    <br>
+
+    @Html.CheckBox("View_Member_Profile")
+    @Html.Label("View Member Profile")
+    <br>
+
+    @Html.CheckBox("Create_Group_Inside_Group")
+    @Html.Label("Create Group Inside Group")
+    <br>
+
+    @Html.CheckBox("Set_Permissions_Of_User")
+    @Html.Label("Set Permissions Of User")
+    <br>
+
+    @Html.CheckBox("Update_Password_User")
+    @Html.Label("Update Password User")
+    <br>
+
+    @Html.CheckBox("Update_Profile_User")
+    @Html.Label("Update Profile User")
+    <br />
+  
+  }
+ 
+  else
+  {
+        @Html.CheckBox("View_Member_Data_In_Group")
+    @Html.Label("View Member Data In Group")
+    <br>
+
+    @Html.CheckBox("Delete_User_in_Group")
+    @Html.Label("Delete User in Group")
+    <br>
+
+    @Html.CheckBox("Create_User_in_Group")
+    @Html.Label("Create User in Group")
+    <br>
+
+    @Html.CheckBox("View_Member_Profile")
+    @Html.Label("View Member Profile")
+       
+  }
+
+</div>

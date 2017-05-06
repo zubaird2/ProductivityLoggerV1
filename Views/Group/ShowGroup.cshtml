@@ -1,0 +1,86 @@
+﻿@model IEnumerable<PUCIT.AIMRL.PMS.Entities.GroupObject>
+
+@{
+    ViewBag.Title = "ShowGroup";
+    Layout = "~/Views/Shared/_ValidLayout.cshtml";
+}
+
+<h2>ShowGroup</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParentGID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Level)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @{
+    //Html.ActionLink(@item.GName, "GetSubGroupUser", new { id = item.GID })
+            }
+            <a href="/Show/GetSubGroupUser/@item.GID">@item.GName</a>
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.GDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParentGID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Level)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.GID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.GID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.GID })
+        </td>
+    </tr>
+}
+
+</table>

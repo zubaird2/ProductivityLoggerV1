@@ -1,0 +1,35 @@
+﻿@model PUCIT.AIMRL.PMS.Entities.GroupObject
+
+@{
+    ViewBag.Title = "ShowGroupInfo";
+    Layout = "~/Views/Shared/_ValidLayout.cshtml";
+}
+
+<h2>ShowGroupInfo</h2>
+
+<div>
+    Group id:@Model.GID
+    <br>
+    Group Name:@Model.GName
+    <br>
+    Group Description:@Model.GDescription
+    <br>
+    Group Level:@Model.Level
+    <br>
+    Group Created By:@Model.CreatedBy
+    <br>
+    Group Created On:@Model.CreatedOn
+    <br>
+   @if(Model.ModifiedOn!=null)
+   {
+     @:Modified By:
+       @Model.ModifiedBy
+    @:Modified On
+       @Model.ModifiedOn
+    
+   }
+   Group Is Active:@Model.IsActive
+    <br>
+
+ 
+</div>

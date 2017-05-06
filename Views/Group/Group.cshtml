@@ -1,0 +1,68 @@
+﻿@model PUCIT.AIMRL.PMS.Entities.CmplexGroupDTO
+@{
+    ViewBag.Title = "Group";
+    Layout = "~/Views/Shared/_ValidLayout.cshtml";
+}
+<h2><a href="#">Create Group</a></h2>
+<script>
+  
+    function ch() {
+        
+        var sel = document.getElementById('ParentGID');
+        var option = sel.options[sel.selectedIndex];
+        var rel = option.getAttribute('level');
+        
+        if (rel > 0)
+        {
+            rel++;
+            $("#Level").val(rel);
+        }
+        }//function
+     
+    
+    function check()
+    {
+        var selectgroupid = document.getElementById('ParentGID');
+        var option = selectgroupid.options[selectgroupid.selectedIndex];
+        var attributevalue = option.getAttribute('value');
+        //this to inforce a supervisor or other than client to select group must
+        @if(WebMainApp.Security.SessionManager.role.RoleName!="Client")
+        {
+            
+        @:if (attributevalue == 0 )
+        {
+            @:  alert("Select Group");
+            @:  return false;
+        }
+            
+        }
+   }
+   
+</script>
+<span style="color:red;display:block">@ViewBag.Msg</span>
+
+
+<form action="/Group/CreateGroup" method="post">
+
+    <input type="hidden" value="" name="Level" id="Level">
+    Group Name:
+    <input class="form-control" required placeholder="Group Name" type="text" name="GName" value="" />
+    <br>
+
+    Group Description:
+    <textarea class="form-control" required placeholder="Give Some Description about Group" name="GDescription" style="height:100px;width:300px"></textarea>
+    <br>
+    
+    Parent Group:
+    <select name="ParentGID" id="ParentGID" onchange="ch()" class="dropdown-header">
+        <option level="0" value="0">Select Group</option>
+        @foreach (var obj in Model.GroupList)
+        {
+            <option level="@obj.Level" value=@obj.GID>@obj.GName</option>
+        }
+
+    </select>
+    <br>
+    <input type="submit" onclick="check()" class="btn btn-lg btn-success btn-block" value="Create Group">
+</form>
+
